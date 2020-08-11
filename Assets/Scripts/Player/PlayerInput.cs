@@ -5,8 +5,9 @@ namespace Player
     public class PlayerInput
     {
         private const KeyCode
-            ShotKey = KeyCode.Space;
-        
+            VacuumKey = KeyCode.Mouse0,
+            ShotKey = KeyCode.Mouse1;
+
         private float _horizontal;
         private float _vertical;
 
@@ -21,7 +22,10 @@ namespace Player
 
         public Vector3 LookDirection() =>
             (Input.mousePosition);
+
+        public bool IsVacuum() => Input.GetKey(VacuumKey);
         
+        public bool IsCharge() => Input.GetKey(ShotKey);
         public bool IsShot() => Input.GetKeyUp(ShotKey);
     }
 }

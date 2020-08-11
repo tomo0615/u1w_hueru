@@ -29,6 +29,14 @@ namespace Player
             Container
                 .BindInstance(playerAttacker)
                 .AsCached();
+
+            Container
+                .Bind<PlayerRotater>()
+                .AsCached();
+
+            Container
+                .BindInstance(Camera.main)
+                .AsCached();
         }
     }
 }
