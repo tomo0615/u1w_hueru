@@ -58,7 +58,7 @@ namespace Player
                 .Where(_ => _playerInput.IsVacuum())
                 .Subscribe(_ =>
                 {
-                    
+                    _playerAttacker.VacuumEnemy();
                 });
             
             //チャージ
@@ -66,7 +66,7 @@ namespace Player
                 .Where(_ => _playerInput.IsCharge())
                 .Subscribe(_ =>
                 {
-                    
+                    _playerAttacker.Charge();
                 });
             
             //攻撃
@@ -74,7 +74,7 @@ namespace Player
                 .Where(_ => _playerInput.IsShot())
                 .Subscribe(_ =>
                 {
-                    
+                    _playerAttacker.ShotBullet();
                 });
         }
     }
