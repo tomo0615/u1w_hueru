@@ -6,7 +6,7 @@ namespace Player.GUI
 {
     public class ChargeGaugeView : MonoBehaviour
     {
-        [SerializeField] private PlayerAttacker playerAttacker;
+        [SerializeField] private PlayerAttacker playerAttacker = default;
         
         private Image _image;
 
