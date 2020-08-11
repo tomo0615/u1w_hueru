@@ -5,7 +5,7 @@ namespace Player
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private PlayerAttacker playerAttacker;
+        [SerializeField] private PlayerAttacker playerAttacker = default;
         
         public override void InstallBindings()
         {

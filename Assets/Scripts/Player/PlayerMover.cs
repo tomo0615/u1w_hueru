@@ -17,7 +17,7 @@ namespace Player
         
         public void Move(Vector3 moveDirection)
         {
-            _rigidbody2D.MovePosition(_transform.position + moveDirection * Time.deltaTime);
+            _rigidbody2D.velocity =  moveDirection;
         }
     }
 }
