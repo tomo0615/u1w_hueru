@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2526938352145900351}
   - component: {fileID: 2526938352145900350}
   - component: {fileID: 2526938352145900346}
+  - component: {fileID: 1354442943}
   - component: {fileID: 2526938352145900347}
   - component: {fileID: 2526938352145900345}
   - component: {fileID: 2526938352145900344}
@@ -52,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  lifePoint: 3
 --- !u!114 &2526938352145900350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +97,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &1354442943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526938352145900327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 2526938352145900351}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!50 &2526938352145900347
 Rigidbody2D:
   serializedVersion: 4
