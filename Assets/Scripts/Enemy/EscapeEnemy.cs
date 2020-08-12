@@ -9,13 +9,11 @@ namespace Enemy
     public class EscapeEnemy : BaseEnemy
     {
         [Inject] private PlayerController _playerController;
-
-        private NavMeshAgent _navMeshAgent;
-
-        public override void Start()
+        
+        private void Start()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-
+            Initialize();
+            
             this.UpdateAsObservable()
                 .Subscribe(_=>
                 {
@@ -25,7 +23,8 @@ namespace Enemy
 
         private void EscapePlayer()
         {
-            _navMeshAgent.destination = transform.position - _playerController.transform.position;
+            //TODO:精度をあげる
+            navMeshAgent.destination = transform.position - _playerController.transform.position;
         }
         
     }

@@ -1,7 +1,6 @@
 ﻿using Player;
 using UniRx;
 using UniRx.Triggers;
-using UnityEngine.AI;
 using Zenject;
 
 namespace Enemy
@@ -9,12 +8,10 @@ namespace Enemy
     public class ChaseEnemy : BaseEnemy
     {
         [Inject] private PlayerController _playerController;
-
-        private NavMeshAgent _navMeshAgent;
         
-        public override void Start()
+        private void Start()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
+            Initialize();
 
             this.UpdateAsObservable()
                 .Subscribe(_=>
@@ -25,7 +22,7 @@ namespace Enemy
 
         private void ChasePlayer()
         {
-            _navMeshAgent.destination = _playerController.transform.position;
+            navMeshAgent.destination = _playerController.transform.position;
         }
     }
 }

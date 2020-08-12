@@ -11,7 +11,9 @@ namespace Enemy
     {
         [SerializeField] private int hitPoint = 1;
         
-         public virtual void Start()
+        [SerializeField] protected NavMeshAgent navMeshAgent = default;
+        
+         protected void Initialize()
          {
              this.OnCollisionEnter2DAsObservable()
                  .Select(player => player.gameObject.GetComponent<PlayerController>())
@@ -35,6 +37,7 @@ namespace Enemy
         private void Dawn()
         {
             //移動状態になり、吸い込み可能になる
+            Debug.Log("Dawn");
         }
     }
 }
