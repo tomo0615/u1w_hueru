@@ -83,6 +83,8 @@ namespace Player
         public void AttackedEnemy()
         {
             lifePoint--;
+            Debug.Log("Hit");
+            //無敵時間
             
             if(lifePoint > 0) return;
             
