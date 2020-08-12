@@ -1,26 +1,32 @@
-﻿using Interfaces;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Interfaces;
 using Player;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Enemy
 {
     public abstract class BaseEnemy : MonoBehaviour, IDamageable
     {
+        [Inject] protected PlayerController PlayerController;
+        
         [SerializeField] private int hitPoint = 1;
         
         [SerializeField] protected NavMeshAgent navMeshAgent = default;
-        
+
+        [SerializeField] private float dawnCoolTime = 3.0f;
          protected void Initialize()
          {
              this.OnCollisionEnter2DAsObservable()
-                 .Select(player => player.gameObject.GetComponent<PlayerController>())
-                 .Where(player => player != null)
-                 .Subscribe(player =>
+                 .Where(other => other.gameObject == PlayerController.gameObject)
+                 .Subscribe(_ =>
                  {
-                     player.AttackedEnemy();
+                     PlayerController.AttackedEnemy();
                  });
          }
         
@@ -36,8 +42,19 @@ namespace Enemy
 
         private void Dawn()
         {
-            //移動状態になり、吸い込み可能になる
-            Debug.Log("Dawn");
+            //移動不能状態　吸い込み可能になる
+            navMeshAgent.velocity = Vector3.zero;
+            navMeshAgent.isStopped = true;
+
+            DawnCoolTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
+        }
+        
+        private async UniTaskVoid DawnCoolTimeAsync(CancellationToken token)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(dawnCoolTime), cancellationToken: token);
+            
+            navMeshAgent.isStopped = false;
+            hitPoint++;
         }
     }
 }

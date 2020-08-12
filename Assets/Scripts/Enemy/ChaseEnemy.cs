@@ -7,8 +7,6 @@ namespace Enemy
 {
     public class ChaseEnemy : BaseEnemy
     {
-        [Inject] private PlayerController _playerController;
-        
         private void Start()
         {
             Initialize();
@@ -22,7 +20,7 @@ namespace Enemy
 
         private void ChasePlayer()
         {
-            navMeshAgent.destination = _playerController.transform.position;
+            navMeshAgent.destination = PlayerController.transform.position;
         }
     }
 }

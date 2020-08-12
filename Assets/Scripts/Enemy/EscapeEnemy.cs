@@ -8,8 +8,6 @@ namespace Enemy
 {
     public class EscapeEnemy : BaseEnemy
     {
-        [Inject] private PlayerController _playerController;
-        
         private void Start()
         {
             Initialize();
@@ -24,7 +22,7 @@ namespace Enemy
         private void EscapePlayer()
         {
             //TODO:精度をあげる
-            navMeshAgent.destination = transform.position - _playerController.transform.position;
+            navMeshAgent.destination = transform.position - PlayerController.transform.position;
         }
         
     }

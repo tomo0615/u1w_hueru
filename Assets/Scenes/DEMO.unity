@@ -2223,21 +2223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6589727580936634863, guid: f222dee600e17454aa68ae424ab67952,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.1745283
-      objectReference: {fileID: 0}
-    - target: {fileID: 6589727580936634863, guid: f222dee600e17454aa68ae424ab67952,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.66482455
-      objectReference: {fileID: 0}
-    - target: {fileID: 6589727580936634863, guid: f222dee600e17454aa68ae424ab67952,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6589727581388180004, guid: f222dee600e17454aa68ae424ab67952,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2297,11 +2282,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EscapeEnemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6589727581388180025, guid: f222dee600e17454aa68ae424ab67952,
-        type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f222dee600e17454aa68ae424ab67952, type: 3}
@@ -4655,6 +4635,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526938352145900327, guid: 1d674b738d29242eaa97314413c2591d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526938352145900346, guid: 1d674b738d29242eaa97314413c2591d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526938352145900346, guid: 1d674b738d29242eaa97314413c2591d,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2526938352949710019, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
