@@ -45,7 +45,7 @@ namespace Player
 
             var bullet = Instantiate(explosionBullet, shotTransform.position, Quaternion.identity);
             
-            bullet.SetShotDirection(transform.up * shotSpeed);
+            bullet.InitializeBullet(transform.up * shotSpeed);
 
             _chargeTimeSave.Value = 0.0f;
             _isShotable = false;
