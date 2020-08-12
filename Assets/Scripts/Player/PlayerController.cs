@@ -16,6 +16,8 @@ namespace Player
         private PlayerRotater _playerRotater;
         
         [SerializeField] private float moveSpeed = 10f;
+
+        [SerializeField] private int lifePoint = 3;
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
@@ -76,6 +78,15 @@ namespace Player
                 {
                     _playerAttacker.ShotBullet();
                 });
+        }
+
+        public void AttackedEnemy()
+        {
+            lifePoint--;
+            
+            if(lifePoint > 0) return;
+            
+            Debug.Log("GameOver");
         }
     }
 }
