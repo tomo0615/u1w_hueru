@@ -23,7 +23,9 @@ namespace Enemy
          protected void Initialize()
          {
              this.OnCollisionEnter2DAsObservable()
-                 .Where(other => other.gameObject == PlayerController.gameObject)
+                 .Where(other => 
+                     other.gameObject == PlayerController.gameObject &&
+                     navMeshAgent.isStopped == false)
                  .Subscribe(_ =>
                  {
                      PlayerController.AttackedEnemy();
@@ -42,7 +44,7 @@ namespace Enemy
 
         private void Dawn()
         {
-            //移動不能状態　吸い込み可能になる
+            //TODO:吸い込み可能になる 点滅Animation
             navMeshAgent.velocity = Vector3.zero;
             navMeshAgent.isStopped = true;
 
