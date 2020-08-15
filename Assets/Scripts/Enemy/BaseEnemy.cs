@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Interfaces;
 using Player;
+using Score;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -14,13 +15,27 @@ namespace Enemy
 {
     public abstract class BaseEnemy : MonoBehaviour, IDamageable
     {
-        [Inject] protected PlayerController PlayerController;
+        protected PlayerController PlayerController;
+
+        private ScorePresenter _scorePresenter;
         
         [SerializeField] private int hitPoint = 1;
         
         [SerializeField] protected NavMeshAgent navMeshAgent = default;
 
         [SerializeField] private float dawnCoolTime = 3.0f;
+
+        [SerializeField] private float vacuumableRange = 3.0f;
+
+        [SerializeField] private int scoreValue = 10;
+        
+        [Inject]
+        private void Construct(PlayerController playerController, ScorePresenter scorePresenter)
+        {
+            PlayerController = playerController;
+
+            _scorePresenter = scorePresenter;
+        }
         
          protected void Initialize()
          {
@@ -37,6 +52,9 @@ namespace Enemy
                  .Where(_ => IsVacuumable() && PlayerController.IsVacuumEnemy)
                  .Subscribe(_ =>
                  {
+                     //TODO：Effect 
+                     _scorePresenter.OnChangeScore(scoreValue);
+                     
                      Destroy(gameObject);
                  });
 
@@ -65,7 +83,7 @@ namespace Enemy
 
         private void Dawn()
         {
-            //TODO:吸い込み可能になる 点滅Animation
+            //TODO:点滅Animation
             navMeshAgent.isStopped = true;
 
             DawnCoolTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
@@ -82,9 +100,9 @@ namespace Enemy
         protected bool IsVacuumable()
         {
             var sqrDistance = Vector3.SqrMagnitude(PlayerController.transform.position - transform.position);
-            
+
             return navMeshAgent.isStopped &&
-                   sqrDistance <= Mathf.Pow(3.0f, 2);
+                   sqrDistance <= Mathf.Pow(vacuumableRange, 2);
         }
     }
 }

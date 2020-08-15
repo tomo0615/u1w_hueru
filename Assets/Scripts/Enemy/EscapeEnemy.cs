@@ -22,6 +22,5 @@ namespace Enemy
             //TODO:精度をあげる
             navMeshAgent.destination = transform.position - PlayerController.transform.position;
         }
-        
     }
 }
