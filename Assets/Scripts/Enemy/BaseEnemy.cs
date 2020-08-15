@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Interfaces;
 using Player;
 using Score;
@@ -41,6 +40,8 @@ namespace Enemy
         
          protected void Initialize()
          {
+             CollisionDisableAsync(this.GetCancellationTokenOnDestroy()).Forget();
+
              this.OnCollisionEnter2DAsObservable()
                  .Where(other => 
                      other.gameObject == PlayerController.gameObject &&
@@ -67,6 +68,17 @@ namespace Enemy
                      VaccuumedPlayer();
                  });
          }
+
+         private async UniTaskVoid CollisionDisableAsync(CancellationToken token)
+         {
+             var collider = GetComponent<Collider2D>();
+             
+             collider.enabled = false;
+             
+             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
+
+             collider.enabled = true;
+         } 
 
          private void VaccuumedPlayer()
          {
