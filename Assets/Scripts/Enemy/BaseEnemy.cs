@@ -28,6 +28,8 @@ namespace Enemy
         [SerializeField] private float vacuumableRange = 3.0f;
 
         [SerializeField] private int scoreValue = 10;
+
+        private bool _isDawn = false;
         
         [Inject]
         private void Construct(PlayerController playerController, ScorePresenter scorePresenter)
@@ -47,7 +49,7 @@ namespace Enemy
                  {
                      PlayerController.AttackedEnemy();
                  });
-
+             
              this.OnCollisionEnter2DAsObservable()
                  .Where(_ => IsVacuumable() && PlayerController.IsVacuumEnemy)
                  .Subscribe(_ =>
@@ -55,9 +57,9 @@ namespace Enemy
                      //TODO：Effect 
                      _scorePresenter.OnChangeScore(scoreValue);
                      
-                     Destroy(gameObject);
+                     Destroy(transform.root.gameObject);//子にクラスを持たせてるため
                  });
-
+             
              this.UpdateAsObservable()
                  .Where(_ => IsVacuumable() && PlayerController.IsVacuumEnemy)
                  .Subscribe(_ =>
@@ -68,7 +70,8 @@ namespace Enemy
 
          private void VaccuumedPlayer()
          {
-             transform.DOMove(PlayerController.transform.position, 0.5f);
+             navMeshAgent.isStopped = false;
+             navMeshAgent.destination = PlayerController.transform.position;
          }
         
         //Playerのたまに当たったら
@@ -85,7 +88,8 @@ namespace Enemy
         {
             //TODO:点滅Animation
             navMeshAgent.isStopped = true;
-
+            _isDawn = true;
+            
             DawnCoolTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
@@ -94,15 +98,15 @@ namespace Enemy
             await UniTask.Delay(TimeSpan.FromSeconds(dawnCoolTime), cancellationToken: token);
             
             navMeshAgent.isStopped = false;
+            _isDawn = false;
             hitPoint++;
         }
 
         protected bool IsVacuumable()
         {
-            var sqrDistance = Vector3.SqrMagnitude(PlayerController.transform.position - transform.position);
+            var sqrMagnitude = Vector3.SqrMagnitude(PlayerController.transform.position - transform.position);
 
-            return navMeshAgent.isStopped &&
-                   sqrDistance <= Mathf.Pow(vacuumableRange, 2);
+            return _isDawn && sqrMagnitude <= Mathf.Pow(vacuumableRange, 2);
         }
     }
 }

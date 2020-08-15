@@ -8,7 +8,7 @@ namespace Enemy
         private void Start()
         {
             Initialize();
-
+            
             this.UpdateAsObservable()
                 .Where(_=> IsVacuumable() == false)
                 .Subscribe(_=>
@@ -16,6 +16,7 @@ namespace Enemy
                     ChasePlayer();
                 });
         }
+        
 
         private void ChasePlayer()
         {
