@@ -10,14 +10,16 @@ namespace Player
         private PlayerInput _playerInput;
 
         private PlayerMover _playerMover;
-        
+
         private PlayerAttacker _playerAttacker;
 
         private PlayerRotater _playerRotater;
-        
+
         [SerializeField] private float moveSpeed = 10f;
 
         [SerializeField] private int lifePoint = 3;
+
+        public bool IsVacuumEnemy { get; private set; } = false;
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
@@ -57,10 +59,9 @@ namespace Player
             
             //バキューム
             this.UpdateAsObservable()
-                .Where(_ => _playerInput.IsVacuum())
                 .Subscribe(_ =>
                 {
-                    _playerAttacker.VacuumEnemy();
+                    IsVacuumEnemy = _playerInput.IsVacuum();
                 });
             
             //チャージ

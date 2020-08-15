@@ -1,8 +1,5 @@
-﻿using Player;
-using UniRx;
+﻿using UniRx;
 using UniRx.Triggers;
-using UnityEngine.AI;
-using Zenject;
 
 namespace Enemy
 {
@@ -13,6 +10,7 @@ namespace Enemy
             Initialize();
             
             this.UpdateAsObservable()
+                .Where(_=> IsVacuumable() == false)
                 .Subscribe(_=>
                 {
                     EscapePlayer();

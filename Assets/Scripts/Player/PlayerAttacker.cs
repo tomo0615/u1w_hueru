@@ -19,10 +19,9 @@ namespace Player
         public IReadOnlyReactiveProperty<float> ChargeTimeSave => _chargeTimeSave;
 
         private bool _isShotable = false;
-        
+
         public void VacuumEnemy()
         {
-            
         }
 
         public void Charge()
