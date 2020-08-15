@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using GameEnd;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,8 @@ namespace Player
 
         private PlayerRotater _playerRotater;
 
+        private GameEndPresenter _gameEndPresenter;
+
         [SerializeField] private float moveSpeed = 10f;
 
         [SerializeField] private int lifePoint = 3;
@@ -23,7 +26,7 @@ namespace Player
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
-        ,PlayerRotater playerRotater)
+        ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter)
         {
             _playerInput = playerInput;
 
@@ -32,6 +35,8 @@ namespace Player
             _playerAttacker = playerAttacker;
 
             _playerRotater = playerRotater;
+
+            _gameEndPresenter = gameEndPresenter;
         }
         
         private void Start()
@@ -84,12 +89,12 @@ namespace Player
         public void AttackedEnemy()
         {
             lifePoint--;
-            Debug.Log("Hit");
             //無敵時間
             
             if(lifePoint > 0) return;
             
             Debug.Log("GameOver");
+            _gameEndPresenter.OnGameEnd(false);
         }
     }
 }

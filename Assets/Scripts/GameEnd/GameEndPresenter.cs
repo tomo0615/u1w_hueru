@@ -27,7 +27,7 @@ namespace GameEnd
             IsClear = isClear;
         }
 
-        public void OnResult()
+        public void ViewGameEnd()
         {
             if (IsClear)
             {
