@@ -1,5 +1,7 @@
 ﻿using GameEnd;
 using Player;
+using Timer;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -10,13 +12,17 @@ namespace GameState
         private PlayerController _playerController;
         
         private GameEndPresenter _gameEndPresenter;
+
+        private TimePresenter _timePresenter;
         
         [Inject]
-        private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter)
+        private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter)
         {
             _playerController = playerController;
 
             _gameEndPresenter = gameEndPresenter;
+
+            _timePresenter = timePresenter;
         }
         private void Awake()
         {
@@ -56,7 +62,7 @@ namespace GameState
         #region SettingMethod
         private void OnSetUpSetting()
         {
-
+            
         }
 
         private void OnUpdateSetting()
@@ -69,7 +75,10 @@ namespace GameState
 
         private void OnSetUpGame()
         {
- 
+            _timePresenter.OnStartTimer(() =>
+            {
+                _gameEndPresenter.OnGameEnd(false);//GameOver
+            });
         }
 
         private void OnUpdateGame()
