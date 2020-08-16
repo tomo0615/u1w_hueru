@@ -1,4 +1,7 @@
-﻿using GameEnd;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using GameEnd;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -18,12 +21,15 @@ namespace Player
 
         private GameEndPresenter _gameEndPresenter;
 
-        [SerializeField] private float moveSpeed = 10f;
+        [SerializeField] private float moveSpeed = 10.0f;
 
         [SerializeField] private int lifePoint = 3;
 
+        [SerializeField] private float invincibleTime = 2.0f;
         public bool IsVacuumEnemy { get; private set; } = false;
-        
+
+        private bool _isDamageable = true;
+            
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
         ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter)
@@ -88,13 +94,23 @@ namespace Player
 
         public void AttackedEnemy()
         {
-            lifePoint--;
-            //無敵時間
+            if (_isDamageable == false) return;
+            //無敵時間を可視化する
+            _isDamageable = false;
+            InvincibleTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
             
+            lifePoint--;
+
             if(lifePoint > 0) return;
             
-            Debug.Log("GameOver");
             _gameEndPresenter.OnGameEnd(false);
+        }
+
+        private async UniTaskVoid InvincibleTimeAsync(CancellationToken token)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(invincibleTime), cancellationToken: token);
+
+            _isDamageable = true;
         }
     }
 }
