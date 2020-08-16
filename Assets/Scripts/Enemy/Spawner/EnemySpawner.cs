@@ -20,11 +20,11 @@ namespace Enemy.Spawner
 
         public void InstanceRandomEnemy(Vector3 spawnPosition)
         {
-            var randomCount = Random.Range(1, maxRandomCount);
+            var randomCount = Random.Range(1, maxRandomCount+1);
 
             for (var i = 0; i < randomCount; i++)
             {
-                var randomIndex = Random.Range(0, enemySpawnTable.EnemyList.Count - 1);
+                var randomIndex = Random.Range(0, enemySpawnTable.EnemyList.Count);
                 
                 spawnPosition = GetInstancePosition(spawnPosition);
 
@@ -36,8 +36,8 @@ namespace Enemy.Spawner
         {
             var random = Random.Range(0f, 360f);
             var theta = random * Mathf.PI / 180f;
-            var x = Mathf.Cos(theta) * 1 + position.x;
-            var y = Mathf.Sin(theta) * 1 + position.y;
+            var x = Mathf.Cos(theta) + position.x;
+            var y = Mathf.Sin(theta) + position.y;
             return new Vector3(x, y, 0f);
         }
     }
