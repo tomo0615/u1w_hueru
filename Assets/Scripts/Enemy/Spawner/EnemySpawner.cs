@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using GameEnd;
+using UniRx;
+using UniRx.Triggers;
+using UnityEngine;
+using Zenject;
 
 namespace Enemy.Spawner
 {
@@ -7,17 +11,31 @@ namespace Enemy.Spawner
         [SerializeField] private EnemySpawnTable enemySpawnTable;
 
         [SerializeField] private int maxRandomCount = 3;
+
+        private int _currentEnemyCount = 0;
+
+        [Inject] private GameEndPresenter _gameEndPresenter;
+        
         private void Start()
         {
-            InstanceEnemy();
-        }
-        
-        //攻撃を外したら呼び出す
-        public void InstanceEnemy()
-        { 
-            Instantiate(enemySpawnTable.EnemyList[0], transform.position, Quaternion.identity);
+            InstanceEnemy(0, transform.position);
+
+            this.UpdateAsObservable()
+                .Where(_ => _currentEnemyCount <= 0)
+                .Subscribe(_ =>
+                {
+                    _gameEndPresenter.OnGameEnd(true);
+                });
         }
 
+
+        private void InstanceEnemy(int index, Vector3 spawnPosition)
+        { 
+            Instantiate(enemySpawnTable.EnemyList[index], spawnPosition, Quaternion.identity);
+            _currentEnemyCount++;
+        }
+
+        //攻撃を外したら呼び出す
         public void InstanceRandomEnemy(Vector3 spawnPosition)
         {
             var randomCount = Random.Range(1, maxRandomCount+1);
@@ -28,7 +46,7 @@ namespace Enemy.Spawner
                 
                 spawnPosition = GetInstancePosition(spawnPosition);
 
-                Instantiate(enemySpawnTable.EnemyList[randomIndex], spawnPosition, Quaternion.identity);
+                InstanceEnemy(randomIndex, spawnPosition);
             }
         }
         
@@ -39,6 +57,11 @@ namespace Enemy.Spawner
             var x = Mathf.Cos(theta) + position.x;
             var y = Mathf.Sin(theta) + position.y;
             return new Vector3(x, y, 0f);
+        }
+
+        public void DecreaseEnemy()
+        {
+            _currentEnemyCount--;
         }
     }
 }

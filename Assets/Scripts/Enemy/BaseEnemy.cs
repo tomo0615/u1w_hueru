@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Enemy.Spawner;
 using Interfaces;
 using Player;
 using Score;
@@ -17,6 +18,8 @@ namespace Enemy
         protected PlayerController PlayerController;
 
         private ScorePresenter _scorePresenter;
+
+        private EnemySpawner _enemySpawner;
         
         [SerializeField] private int hitPoint = 1;
         
@@ -31,11 +34,13 @@ namespace Enemy
         private bool _isDawn = false;
         
         [Inject]
-        private void Construct(PlayerController playerController, ScorePresenter scorePresenter)
+        private void Construct(PlayerController playerController, ScorePresenter scorePresenter, EnemySpawner enemySpawner)
         {
             PlayerController = playerController;
 
             _scorePresenter = scorePresenter;
+
+            _enemySpawner = enemySpawner;
         }
         
          protected void Initialize()
@@ -58,6 +63,7 @@ namespace Enemy
                      //TODO：Effect 
                      _scorePresenter.OnChangeScore(scoreValue);
                      
+                     _enemySpawner.DecreaseEnemy();
                      Destroy(transform.root.gameObject);//子にクラスを持たせてるため
                  });
              
