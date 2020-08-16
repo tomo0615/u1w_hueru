@@ -11,6 +11,8 @@ namespace Timer
         [SerializeField] private TimeView timeView;
 
         private TimeModel _timeModel;
+
+        private IDisposable _timerEndObservable;
         
         private void Awake()
         {
@@ -27,9 +29,15 @@ namespace Timer
 
 
             //終了後
-            observable
-                .Subscribe(value => { _timeModel.SetTimerValue(value); },
+            _timerEndObservable
+                = observable
+                    .Subscribe(value => { _timeModel.SetTimerValue(value); },
                     action);
+        }
+
+        public void OnStopTimer()
+        {
+            _timerEndObservable.Dispose();
         }
     }
 }

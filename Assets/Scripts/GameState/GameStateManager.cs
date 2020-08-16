@@ -96,6 +96,8 @@ namespace GameState
         #region FinishMethod
         private void OnSetUpFinish()
         {
+            _timePresenter.OnStopTimer();
+            
             _gameEndPresenter.ViewGameEnd();
         }
         private void OnUpdateFinish()
