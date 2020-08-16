@@ -7,6 +7,8 @@ namespace GameEnd
     {
         private TextMeshProUGUI _gameClearText;
 
+        [SerializeField] private GameObject clearPanel;
+        
         public void InitializeGameEndViewer()
         {
             _gameClearText = GetComponent<TextMeshProUGUI>();
@@ -15,6 +17,8 @@ namespace GameEnd
         public void ViewGameClear()
         {
             _gameClearText.enabled = true;
+            
+            clearPanel.SetActive(true);
         }
     }
 }
