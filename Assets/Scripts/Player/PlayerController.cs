@@ -56,7 +56,7 @@ namespace Player
             _gameEndPresenter = gameEndPresenter;
         }
         
-        private void Start()
+        public void Initialize()
         {
             //入力
             this.UpdateAsObservable()

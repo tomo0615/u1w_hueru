@@ -1,5 +1,7 @@
-﻿using GameEnd;
+﻿using Enemy.Spawner;
+using GameEnd;
 using Player;
+using SceneLoader;
 using Timer;
 using UniRx;
 using UnityEngine;
@@ -14,15 +16,24 @@ namespace GameState
         private GameEndPresenter _gameEndPresenter;
 
         private TimePresenter _timePresenter;
+
+        private EnemySpawner _enemySpawner;
+
+        private FadeSceneLoader _fadeSceneLoader;
         
         [Inject]
-        private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter)
+        private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter,
+            EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader)
         {
             _playerController = playerController;
 
             _gameEndPresenter = gameEndPresenter;
 
             _timePresenter = timePresenter;
+
+            _enemySpawner = enemySpawner;
+
+            _fadeSceneLoader = fadeSceneLoader;
         }
         private void Awake()
         {
@@ -67,6 +78,8 @@ namespace GameState
 
         private void OnUpdateSetting()
         {
+            if (_fadeSceneLoader.IsFadeOutCompleted == false) return;
+            
             GoToState(GameState.Game);
         }
         #endregion
@@ -75,6 +88,10 @@ namespace GameState
 
         private void OnSetUpGame()
         {
+            _playerController.Initialize();
+            
+            _enemySpawner.Initialize();
+            
             _timePresenter.OnStartTimer(() =>
             {
                 _gameEndPresenter.OnGameEnd(false);//GameOver

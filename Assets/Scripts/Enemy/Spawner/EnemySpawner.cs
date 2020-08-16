@@ -19,8 +19,8 @@ namespace Enemy.Spawner
         [SerializeField] private Transform firstChaseTransform;
 
         [SerializeField] private Transform firstEscapeTransform;
-
-        private void Start()
+        
+        public void Initialize()
         {
             InstanceEnemy(1, firstEscapeTransform.position);
 
