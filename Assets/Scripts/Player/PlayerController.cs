@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using GameEnd;
+using Player.GUI.Life;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -23,7 +24,9 @@ namespace Player
 
         [SerializeField] private float moveSpeed = 10.0f;
 
-        [SerializeField] private int lifePoint = 3;
+        [SerializeField] private LifePresenter lifePresenter;
+        
+        private int _lifePoint = 3;
 
         [SerializeField] private float invincibleTime = 2.0f;
         public bool IsVacuumEnemy { get; private set; } = false;
@@ -99,9 +102,10 @@ namespace Player
             _isDamageable = false;
             InvincibleTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
             
-            lifePoint--;
+            _lifePoint--;
+            lifePresenter.OnChangeLife();
 
-            if(lifePoint > 0) return;
+            if(_lifePoint > 0) return;
             
             _gameEndPresenter.OnGameEnd(false);
         }

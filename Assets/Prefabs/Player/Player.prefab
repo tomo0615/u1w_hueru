@@ -53,7 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  lifePoint: 3
+  lifePresenter: {fileID: 0}
+  invincibleTime: 2
 --- !u!114 &2526938352145900350
 MonoBehaviour:
   m_ObjectHideFlags: 0
