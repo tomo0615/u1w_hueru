@@ -31,6 +31,11 @@ namespace Enemy
 
         [SerializeField] private int scoreValue = 10;
 
+        [SerializeField] private Sprite defaultSprite = default;
+        [SerializeField] private Sprite dawnSprite = default;
+
+        private SpriteRenderer _spriteRenderer;
+        
         private bool _isDawn = false;
         
         [Inject]
@@ -45,6 +50,8 @@ namespace Enemy
         
          protected void Initialize()
          {
+             _spriteRenderer = GetComponent<SpriteRenderer>();
+             
              CollisionDisableAsync(this.GetCancellationTokenOnDestroy()).Forget();
 
              this.OnCollisionEnter2DAsObservable()
@@ -113,7 +120,11 @@ namespace Enemy
 
         private async UniTaskVoid DawnCoolTimeAsync(CancellationToken token)
         {
+            _spriteRenderer.sprite = dawnSprite;
+            
             await UniTask.Delay(TimeSpan.FromSeconds(dawnCoolTime), cancellationToken: token);
+
+            _spriteRenderer.sprite = defaultSprite;
             
             navMeshAgent.isStopped = false;
             _isDawn = false;

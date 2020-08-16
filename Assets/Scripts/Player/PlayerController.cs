@@ -10,6 +10,7 @@ using Zenject;
 
 namespace Player
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _playerInput;
@@ -35,7 +36,11 @@ namespace Player
             
         
         private readonly Vector3 _moveLimitPosition = new Vector3(8.7f, 0, 0);
-        
+
+        [SerializeField] private Sprite cannonSprite = default;
+        [SerializeField] private Sprite vacuumSprite = default;
+
+        [SerializeField] private SpriteRenderer weaponSpriteRenderer;
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
@@ -91,6 +96,15 @@ namespace Player
                 .Subscribe(_ =>
                 {
                     IsVacuumEnemy = _playerInput.IsVacuum();
+
+                    if (IsVacuumEnemy)
+                    {
+                        weaponSpriteRenderer.sprite = vacuumSprite;
+                    }
+                    else
+                    {
+                        weaponSpriteRenderer.sprite = cannonSprite;
+                    }
                 });
             
             //チャージ

@@ -12,29 +12,28 @@ namespace Player.Bullet
     {
         [Inject] private EnemySpawner _enemySpawner;
 
-        private bool _isEnemyHit = false;
+        private bool _isHitEnemy = false;
         
         public void Explosion()
         {
             transform.DOScale(Vector3.one, 0.1f)
-                .OnComplete(() => Destroy(gameObject));
+                .OnComplete(() =>
+                {
+                    if (_isHitEnemy == false)
+                    {
+                        _enemySpawner.InstanceRandomEnemy(transform.position);
+                    }
+                    
+                    Destroy(gameObject);
+                });
             
-            //EnemyHit
             this.OnCollisionEnter2DAsObservable()
                 .Select(damageable => damageable.gameObject.GetComponent<IDamageable>())
                 .Where(damageable => damageable != null)
                 .Subscribe(damageable =>
                 {
                     damageable.ApplyDamage();
-                    _isEnemyHit = true;
-                });
-            
-            //外した時
-            this.OnCollisionEnter2DAsObservable()
-                .Where(_ => _isEnemyHit == false)
-                .Subscribe(damageable =>
-                {
-                    _enemySpawner.InstanceRandomEnemy(transform.position);
+                    _isHitEnemy = true;
                 });
         }
     }
