@@ -33,6 +33,10 @@ namespace Player
 
         private bool _isDamageable = true;
             
+        
+        private readonly Vector3 _moveLimitPosition = new Vector3(8.7f, 0, 0);
+        
+        
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
         ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter)
@@ -69,6 +73,17 @@ namespace Player
                 .Subscribe(_ =>
                 {
                     _playerMover.Move(_playerInput.MoveDirection() * moveSpeed);
+                });
+            this.UpdateAsObservable()
+                .Subscribe(_ =>
+                {
+                    transform.localPosition =
+                        new Vector3
+                        (
+                            Mathf.Clamp(transform.position.x, -_moveLimitPosition.x, _moveLimitPosition.x),
+                            Mathf.Clamp(transform.position.y, -4.8f, 3.25f),
+                            0
+                        );
                 });
             
             //バキューム

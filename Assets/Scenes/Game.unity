@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150995946}
   - component: {fileID: 150995947}
+  - component: {fileID: 150995948}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -251,6 +252,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2551332, y: 2.6274133}
   m_EdgeRadius: 0
+--- !u!208 &150995948
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150995945}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.685, y: 1.385, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.03, y: -0.91, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &153810566
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699140720}
   - component: {fileID: 699140721}
+  - component: {fileID: 699140722}
   m_Layer: 0
   m_Name: Collider (1)
   m_TagString: Untagged
@@ -927,6 +945,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0541425, y: 1.9302734}
   m_EdgeRadius: 0
+--- !u!208 &699140722
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699140719}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.05, y: 0.98, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.93, y: -0.61, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &803639514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2752,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 13
-      m_TileSpriteIndex: 13
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2933,8 +2967,8 @@ Tilemap:
   - first: {x: 4, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileIndex: 15
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2942,8 +2976,8 @@ Tilemap:
   - first: {x: 5, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileIndex: 15
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2951,8 +2985,8 @@ Tilemap:
   - first: {x: 6, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileIndex: 15
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2960,8 +2994,8 @@ Tilemap:
   - first: {x: 7, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileIndex: 15
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -3467,7 +3501,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: ddd12dccffbcb4781b93afd816927422, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 29028c7071d8b404fbcbca215874ff51, type: 2}
-  - m_RefCount: 80
+  - m_RefCount: 76
     m_Data: {fileID: 11400000, guid: 58a57c21237874fd68b409c1d0a78cd0, type: 2}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: e3b7243f46ad24946b41d335aa980bda, type: 2}
@@ -3491,13 +3525,17 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: cd8a4fec998b644c4becdef6aedd3e97, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 13129a4651463413c974c4093581b021, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 4
+    m_Data: {fileID: 11400000, guid: 5560b52a277d24f348ca6916647842b6, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 3
     m_Data: {fileID: 3863781973224598016, guid: 9c9220884494c4b1bab4e93756579235,
       type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -23789120017108585, guid: 9c9220884494c4b1bab4e93756579235, type: 3}
-  - m_RefCount: 80
+  - m_RefCount: 76
     m_Data: {fileID: 397245766694016283, guid: 9c9220884494c4b1bab4e93756579235, type: 3}
   - m_RefCount: 14
     m_Data: {fileID: 2056622501788987584, guid: 9c9220884494c4b1bab4e93756579235,
@@ -3528,8 +3566,13 @@ Tilemap:
   - m_RefCount: 6
     m_Data: {fileID: -3808606789012426095, guid: 9c9220884494c4b1bab4e93756579235,
       type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 9092704414527828442, guid: 9c9220884494c4b1bab4e93756579235,
+      type: 3}
+  - m_RefCount: 4
+    m_Data: {fileID: 3625071958744917543, guid: 9c9220884494c4b1bab4e93756579235,
       type: 3}
   m_TileMatrixArray:
   - m_RefCount: 162
@@ -4107,6 +4150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606210624}
   - component: {fileID: 1606210625}
+  - component: {fileID: 1606210626}
   m_Layer: 0
   m_Name: Collider (3)
   m_TagString: Untagged
@@ -4154,6 +4198,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.060725, y: 1.9599438}
   m_EdgeRadius: 0
+--- !u!208 &1606210626
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606210623}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.045, y: 0.995, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.5, y: -0.47, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1739986515
 GameObject:
   m_ObjectHideFlags: 0
@@ -4373,6 +4433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1815352890}
   - component: {fileID: 1815352891}
+  - component: {fileID: 1815352892}
   m_Layer: 0
   m_Name: Collider (2)
   m_TagString: Untagged
@@ -4420,6 +4481,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.0588808, y: 1.6487188}
   m_EdgeRadius: 0
+--- !u!208 &1815352892
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815352889}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.555, y: 1.01, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -1.08, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1906430954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4430,6 +4507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906430955}
   - component: {fileID: 1906430956}
+  - component: {fileID: 1906430957}
   m_Layer: 0
   m_Name: Collider (4)
   m_TagString: Untagged
@@ -4477,6 +4555,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.7594514, y: 3.3556795}
   m_EdgeRadius: 0
+--- !u!208 &1906430957
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906430954}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.015, y: 1.695, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.52, y: -0.51, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2012865785
 GameObject:
   m_ObjectHideFlags: 0
