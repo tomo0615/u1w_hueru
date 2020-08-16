@@ -10,7 +10,6 @@ using Zenject;
 
 namespace Player
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _playerInput;

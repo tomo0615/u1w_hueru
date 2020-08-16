@@ -15,11 +15,17 @@ namespace Enemy.Spawner
         private int _currentEnemyCount = 0;
 
         [Inject] private GameEndPresenter _gameEndPresenter;
-        
+
+        [SerializeField] private Transform firstChaseTransform;
+
+        [SerializeField] private Transform firstEscapeTransform;
+
         private void Start()
         {
-            InstanceEnemy(0, transform.position);
+            InstanceEnemy(1, firstEscapeTransform.position);
 
+            InstanceEnemy(0,firstChaseTransform.position);
+            
             this.UpdateAsObservable()
                 .Where(_ => _currentEnemyCount <= 0)
                 .Subscribe(_ =>
