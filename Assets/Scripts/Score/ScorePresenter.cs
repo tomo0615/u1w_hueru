@@ -9,7 +9,7 @@ namespace Score
 
         [SerializeField]
         private ScoreView scoreView = null;
-    
+        
         private void Awake()
         {
             _scoreModel = new ScoreModel();
