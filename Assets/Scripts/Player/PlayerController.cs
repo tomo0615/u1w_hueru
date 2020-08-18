@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using EffectManager;
 using GameEnd;
 using Player.GUI.Life;
 using UniRx;
@@ -21,6 +22,8 @@ namespace Player
         private PlayerRotater _playerRotater;
 
         private GameEndPresenter _gameEndPresenter;
+
+        private GameEffectManager _gameEffectManager;
 
         [SerializeField] private float moveSpeed = 10.0f;
 
@@ -44,7 +47,7 @@ namespace Player
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
-        ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter)
+        ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter,GameEffectManager gameEffectManager)
         {
             _playerInput = playerInput;
 
@@ -55,6 +58,8 @@ namespace Player
             _playerRotater = playerRotater;
 
             _gameEndPresenter = gameEndPresenter;
+
+            _gameEffectManager = gameEffectManager;
         }
         
         public void Initialize()
@@ -137,7 +142,7 @@ namespace Player
                 .ThrottleFirst(TimeSpan.FromSeconds(1.0f))
                 .Subscribe(_ =>
                 {
-                    //EFFECT再生
+                    _gameEffectManager.OnGenelateEffect(transform.position, EffectType.PlayerDamage);
                 });
         }
 

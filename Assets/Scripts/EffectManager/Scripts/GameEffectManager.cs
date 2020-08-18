@@ -3,7 +3,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace GameEffectManager.Scripts
+namespace EffectManager
 {
     public class GameEffectManager : MonoBehaviour
     {

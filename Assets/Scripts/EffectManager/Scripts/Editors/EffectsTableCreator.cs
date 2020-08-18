@@ -35,7 +35,7 @@ public class EffectsTableCreator : Editor
             enumName: effectEnumName,          //enumの名前
             itemNameList: names,                //enumの項目
                                                 //作成したファイルのパスをAssetsから拡張子まで指定
-            exportPath: "Assets/GameEffectManager/Scripts/" + effectEnumName + ".cs"
+            exportPath: "Assets/Scripts/EffectManager/Scripts/" + effectEnumName + ".cs"
         );
     }
 }
