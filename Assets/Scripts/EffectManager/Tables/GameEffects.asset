@@ -15,3 +15,4 @@ MonoBehaviour:
   gameEffectList:
   - {fileID: 7916495995511155219, guid: 6245717088ab5447f8587f81c011ab28, type: 3}
   - {fileID: 9204735202728107602, guid: 037e927fb75cf49289c9ea561c466f5b, type: 3}
+  - {fileID: 2213066577420508178, guid: 974eb490b88df457786db21d4b955271, type: 3}

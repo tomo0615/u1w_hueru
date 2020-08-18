@@ -43,7 +43,9 @@ namespace Player
 
         [SerializeField] private SpriteRenderer weaponSpriteRenderer;
 
-        private bool _isUpdatableObservable = true; 
+        private bool _isUpdatableObservable = true;
+
+        [SerializeField] private ParticleSystem vacuumEffect; //EffectManagerに対応させる
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
@@ -87,6 +89,7 @@ namespace Player
                 {
                     _playerMover.Move(_playerInput.MoveDirection() * moveSpeed);
                 });
+            
             this.UpdateAsObservable()
                 .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
@@ -110,10 +113,12 @@ namespace Player
                     if (IsVacuumEnemy)
                     {
                         weaponSpriteRenderer.sprite = vacuumSprite;
+                        vacuumEffect.Play();
                     }
                     else
                     {
                         weaponSpriteRenderer.sprite = cannonSprite;
+                        vacuumEffect.Stop();
                     }
                 });
             
@@ -139,7 +144,7 @@ namespace Player
                 .Where(_ => _isUpdatableObservable)
                 .Where(_ => _isDamageable == false)
                 .Skip(1)
-                .ThrottleFirst(TimeSpan.FromSeconds(1.0f))
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5f))
                 .Subscribe(_ =>
                 {
                     _gameEffectManager.OnGenelateEffect(transform.position, EffectType.PlayerDamage);
