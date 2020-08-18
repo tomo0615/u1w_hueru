@@ -10,7 +10,7 @@ namespace Player.GUI
         
         private Image _image;
 
-        private const int ChargeMaxValue = 2;
+        private const int ChargeMaxValue = 1;
         
         private void Start()
         {

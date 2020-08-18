@@ -37,6 +37,9 @@ namespace Enemy
         private SpriteRenderer _spriteRenderer;
         
         private bool _isDawn = false;
+
+        [SerializeField] private float defaultSpeed = 3.5f;
+        [SerializeField] private float dawnedSpeed = 10.0f;
         
         [Inject]
         private void Construct(PlayerController playerController, ScorePresenter scorePresenter, EnemySpawner enemySpawner)
@@ -115,6 +118,8 @@ namespace Enemy
             navMeshAgent.isStopped = true;
             _isDawn = true;
             
+            navMeshAgent.speed = dawnedSpeed;
+            
             DawnCoolTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
@@ -128,6 +133,8 @@ namespace Enemy
             
             navMeshAgent.isStopped = false;
             _isDawn = false;
+            navMeshAgent.speed = defaultSpeed;
+            
             hitPoint++;
         }
 

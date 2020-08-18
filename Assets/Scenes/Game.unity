@@ -5800,11 +5800,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2526938352145900350, guid: 1d674b738d29242eaa97314413c2591d,
+        type: 3}
+      propertyPath: chargeTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2526938352145900351, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
       propertyPath: lifePresenter
       value: 
       objectReference: {fileID: 153810571}
+    - target: {fileID: 2526938352145900351, guid: 1d674b738d29242eaa97314413c2591d,
+        type: 3}
+      propertyPath: invincibleTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2526938352949710019, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
       propertyPath: m_Camera
