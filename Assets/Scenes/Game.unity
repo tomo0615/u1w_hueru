@@ -5828,17 +5828,17 @@ PrefabInstance:
     - target: {fileID: 2526938354171120469, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.08235294
       objectReference: {fileID: 0}
     - target: {fileID: 2526938354171120469, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.8058649
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2526938354171120469, guid: 1d674b738d29242eaa97314413c2591d,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.7921569
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d674b738d29242eaa97314413c2591d, type: 3}

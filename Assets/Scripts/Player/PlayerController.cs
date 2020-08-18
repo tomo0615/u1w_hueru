@@ -32,14 +32,15 @@ namespace Player
         public bool IsVacuumEnemy { get; private set; } = false;
 
         private bool _isDamageable = true;
-            
-        
+
         private readonly Vector3 _moveLimitPosition = new Vector3(8.7f, 0, 0);
 
         [SerializeField] private Sprite cannonSprite = default;
         [SerializeField] private Sprite vacuumSprite = default;
 
         [SerializeField] private SpriteRenderer weaponSpriteRenderer;
+
+        private bool _isUpdatableObservable = true; 
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
@@ -60,6 +61,7 @@ namespace Player
         {
             //入力
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
                 {
                     _playerInput.InputKeys();  
@@ -67,6 +69,7 @@ namespace Player
             
             //回転
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
                 {
                     _playerRotater.LookMousePosition(_playerInput.LookDirection());
@@ -74,11 +77,13 @@ namespace Player
             
             //移動
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
                 {
                     _playerMover.Move(_playerInput.MoveDirection() * moveSpeed);
                 });
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
                 {
                     transform.localPosition =
@@ -92,6 +97,7 @@ namespace Player
             
             //バキューム
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Subscribe(_ =>
                 {
                     IsVacuumEnemy = _playerInput.IsVacuum();
@@ -108,6 +114,7 @@ namespace Player
             
             //チャージ
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Where(_ => _playerInput.IsCharge())
                 .Subscribe(_ =>
                 {
@@ -116,11 +123,17 @@ namespace Player
             
             //攻撃
             this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
                 .Where(_ => _playerInput.IsShot())
                 .Subscribe(_ =>
                 {
                     _playerAttacker.ShotBullet();
                 });
+        }
+
+        public void StopUpdateObservable()
+        {
+            _isUpdatableObservable = false;
         }
 
         public void AttackedEnemy()

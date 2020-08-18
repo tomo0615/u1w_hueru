@@ -21,7 +21,7 @@ namespace GameState
         private FadeSceneLoader _fadeSceneLoader;
 
         private StartView _startView;
-        
+
         [Inject]
         private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter,
             EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader, StartView startView)
@@ -128,6 +128,8 @@ namespace GameState
         #region FinishMethod
         private void OnSetUpFinish()
         {
+            _playerController.StopUpdateObservable();
+            
             _timePresenter.OnStopTimer();
             
             _gameEndPresenter.ViewGameEnd();
