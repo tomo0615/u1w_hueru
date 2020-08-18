@@ -15,12 +15,12 @@ namespace Score
 
         private void Start()
         {
-            _scoreText.text = "Score:0";
+            _scoreText.text = "Score:" + 0.ToString("D5");
         }
 
         public void ViewScoreText(int value)
         {
-            _scoreText.text = "Score:"+ value;
+            _scoreText.text = "Score:"+ value.ToString("D5");
         }
     }
 }

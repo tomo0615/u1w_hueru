@@ -129,6 +129,16 @@ namespace Player
                 {
                     _playerAttacker.ShotBullet();
                 });
+
+            this.UpdateAsObservable()
+                .Where(_ => _isUpdatableObservable)
+                .Where(_ => _isDamageable == false)
+                .Skip(1)
+                .ThrottleFirst(TimeSpan.FromSeconds(1.0f))
+                .Subscribe(_ =>
+                {
+                    //EFFECT再生
+                });
         }
 
         public void StopUpdateObservable()
