@@ -1,10 +1,9 @@
 ﻿using Enemy.Spawner;
 using GameEnd;
 using Player;
+using Player.GUI.Start;
 using SceneLoader;
 using Timer;
-using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace GameState
@@ -20,10 +19,12 @@ namespace GameState
         private EnemySpawner _enemySpawner;
 
         private FadeSceneLoader _fadeSceneLoader;
+
+        private StartView _startView;
         
         [Inject]
         private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter,
-            EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader)
+            EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader, StartView startView)
         {
             _playerController = playerController;
 
@@ -34,6 +35,8 @@ namespace GameState
             _enemySpawner = enemySpawner;
 
             _fadeSceneLoader = fadeSceneLoader;
+
+            _startView = startView;
         }
         private void Awake()
         {
@@ -47,6 +50,12 @@ namespace GameState
 
         private void InitializeStateMachine()
         {
+            //FadeOut
+            {
+                var state = new State<GameState>(GameState.FadeOut);
+                state.UpdateAction = OnUpdateFadeOut;
+                AddState(state);
+            }
             //Setting
             {
                 var state = new State<GameState>(GameState.Setting);
@@ -69,16 +78,25 @@ namespace GameState
                 AddState(state);
             }
         }
-        
+
+        #region  FadeOutMethod
+        private void OnUpdateFadeOut()
+        {
+            if (_fadeSceneLoader.IsFadeOutCompleted == false) return;
+            
+            GoToState(GameState.Setting);
+        }
+        #endregion
+
         #region SettingMethod
         private void OnSetUpSetting()
         {
-            
+            _startView.ViewStartSignal();
         }
 
         private void OnUpdateSetting()
         {
-            if (_fadeSceneLoader.IsFadeOutCompleted == false) return;
+            if (_startView.IsFinishedStartSignal == false) return;
             
             GoToState(GameState.Game);
         }
@@ -100,9 +118,6 @@ namespace GameState
 
         private void OnUpdateGame()
         {
-            //Playerを使えるようにする
-            //playerController.UpdatePlayerAction();
-
             if (_gameEndPresenter.IsGameEnd)
             {
                 GoToState(GameState.Finish);
