@@ -150,6 +150,8 @@ MonoBehaviour:
   scoreValue: 10
   defaultSprite: {fileID: 21300000, guid: 43a068022231a4bcc869bfe33ed34f78, type: 3}
   dawnSprite: {fileID: 21300000, guid: dfa538a0d74234a3faa44cda760af74c, type: 3}
+  defaultSpeed: 3.5
+  dawnedSpeed: 15
 --- !u!1 &6589727581388180006
 GameObject:
   m_ObjectHideFlags: 0
