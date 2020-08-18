@@ -16,7 +16,7 @@ namespace Player.Bullet
         
         public void Explosion()
         {
-            transform.DOScale(Vector3.one, 0.1f)
+            transform.DOScale(Vector3.one*1.5f, 0.1f)
                 .OnComplete(() =>
                 {
                     if (_isHitEnemy == false)

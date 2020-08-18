@@ -17,7 +17,7 @@ namespace UIButtons
             var scoreValue = _scorePresenter.GetScoreValue();
             
             naichilab.UnityRoomTweet
-                .Tweet(gameId,"Score" + scoreValue + "を獲得しました！","unityRoom","unity1week");
+                .Tweet(gameId,"Score:" + scoreValue + "を獲得しました！","unityRoom","unity1week");
         }
     }
 }
