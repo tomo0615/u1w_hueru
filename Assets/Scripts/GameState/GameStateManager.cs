@@ -74,7 +74,6 @@ namespace GameState
             {
                 var state = new State<GameState>(GameState.Finish);
                 state.SetUpAction = OnSetUpFinish;
-                state.UpdateAction = OnUpdateFinish;
                 AddState(state);
             }
         }
@@ -133,10 +132,6 @@ namespace GameState
             _timePresenter.OnStopTimer();
             
             _gameEndPresenter.ViewGameEnd();
-        }
-        private void OnUpdateFinish()
-        {
-            //Debug.Log("Finish");
         }
         #endregion
     }
