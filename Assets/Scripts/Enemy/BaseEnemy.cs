@@ -5,6 +5,7 @@ using Enemy.Spawner;
 using Interfaces;
 using Player;
 using Score;
+using Sound;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace Enemy
         private ScorePresenter _scorePresenter;
 
         private EnemySpawner _enemySpawner;
+
+        private AudioManager _audioManager;
         
         [SerializeField] private int hitPoint = 1;
         
@@ -42,13 +45,16 @@ namespace Enemy
         [SerializeField] private float dawnedSpeed = 10.0f;
         
         [Inject]
-        private void Construct(PlayerController playerController, ScorePresenter scorePresenter, EnemySpawner enemySpawner)
+        private void Construct(PlayerController playerController, ScorePresenter scorePresenter
+            , EnemySpawner enemySpawner ,AudioManager audioManager)
         {
             PlayerController = playerController;
 
             _scorePresenter = scorePresenter;
 
             _enemySpawner = enemySpawner;
+
+            _audioManager = audioManager;
         }
         
          protected void Initialize()
@@ -70,8 +76,9 @@ namespace Enemy
                  .Where(_ => IsVacuumable() && PlayerController.IsVacuumEnemy)
                  .Subscribe(_ =>
                  {
-                     //TODO：Effect 
                      _scorePresenter.OnChangeScore(scoreValue);
+                     
+                     _audioManager.PlaySE(SEType.ScoreGet);
                      
                      _enemySpawner.DecreaseEnemy();
                      Destroy(transform.root.gameObject);//子にクラスを持たせてるため
@@ -115,6 +122,8 @@ namespace Enemy
         private void Dawn()
         {
             //TODO:点滅Animation
+            _audioManager.PlaySE(SEType.EnemyDawn);
+            
             navMeshAgent.isStopped = true;
             _isDawn = true;
             

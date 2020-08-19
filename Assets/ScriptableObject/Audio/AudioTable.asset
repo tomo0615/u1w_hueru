@@ -12,16 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd15ea7ac1654c03b7425cb0795a88e, type: 3}
   m_Name: AudioTable
   m_EditorClassIdentifier: 
-  titleBGM: {fileID: 0}
-  gameBGM: {fileID: 0}
-  resultBGM: {fileID: 0}
-  buttonOk: {fileID: 0}
-  buttonCancel: {fileID: 0}
-  unitAttack: {fileID: 0}
-  unitDamage: {fileID: 0}
-  unitDeath: {fileID: 0}
-  enemyAttack: {fileID: 0}
-  enemyDamage: {fileID: 0}
-  enemyDestroy: {fileID: 0}
-  win: {fileID: 0}
-  lose: {fileID: 0}
+  gameBGM: {fileID: 8300000, guid: c5a6af7adb029df4ba0967bc4de9e7ac, type: 3}
+  buttonOk: {fileID: 8300000, guid: ff25c0a11d55322409f363c3fbcc7d66, type: 3}
+  playerShot: {fileID: 8300000, guid: 71f60e906a69c7d499e1aa95366ba1ee, type: 3}
+  playerDamage: {fileID: 8300000, guid: 9ea9eb449f3e8794095a23655db51373, type: 3}
+  enemyDawn: {fileID: 8300000, guid: f9517356afb533a41b9e7cb6f155031e, type: 3}
+  scoreGet: {fileID: 8300000, guid: 34c638d8d99ccfd44a261f13505ab317, type: 3}
+  explosion: {fileID: 8300000, guid: 08c98e789286e9e40b9684b1d03958e7, type: 3}

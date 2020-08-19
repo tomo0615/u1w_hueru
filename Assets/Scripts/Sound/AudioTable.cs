@@ -7,35 +7,23 @@ namespace Sound
     public class AudioTable : ScriptableObject
     {
         #region BGM
-        public AudioClip titleBGM;
-
         public AudioClip gameBGM;
-
-        public AudioClip resultBGM;
         #endregion
 
         #region Common Audio
         public AudioClip buttonOk;
-
-        public AudioClip buttonCancel;
         #endregion
 
         #region GameAudio
-        public AudioClip unitAttack;
+        public AudioClip playerShot;
 
-        public AudioClip unitDamage;
+        public AudioClip playerDamage;
 
-        public AudioClip unitDeath;
+        public AudioClip enemyDawn;
 
-        public AudioClip enemyAttack;
+        public AudioClip scoreGet;
 
-        public AudioClip enemyDamage;
-
-        public AudioClip enemyDestroy;
-
-        public AudioClip win;
-
-        public AudioClip lose;
+        public AudioClip explosion;
         #endregion
     }
 }

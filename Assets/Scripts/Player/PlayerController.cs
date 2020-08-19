@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using EffectManager;
 using GameEnd;
 using Player.GUI.Life;
+using Sound;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Player
 
         private GameEffectManager _gameEffectManager;
 
+        private AudioManager _audioManager;
+        
         [SerializeField] private float moveSpeed = 10.0f;
 
         [SerializeField] private LifePresenter lifePresenter;
@@ -49,7 +52,8 @@ namespace Player
         
         [Inject]
         private void Construct(PlayerInput playerInput, PlayerMover playerMover, PlayerAttacker playerAttacker
-        ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter,GameEffectManager gameEffectManager)
+        ,PlayerRotater playerRotater, GameEndPresenter gameEndPresenter,GameEffectManager gameEffectManager
+        ,AudioManager audioManager)
         {
             _playerInput = playerInput;
 
@@ -62,6 +66,8 @@ namespace Player
             _gameEndPresenter = gameEndPresenter;
 
             _gameEffectManager = gameEffectManager;
+
+            _audioManager = audioManager;
         }
         
         public void Initialize()
@@ -138,6 +144,8 @@ namespace Player
                 .Subscribe(_ =>
                 {
                     _playerAttacker.ShotBullet();
+                    
+                    _audioManager.PlaySE(SEType.PlayerShot);
                 });
 
             this.UpdateAsObservable()
@@ -165,6 +173,8 @@ namespace Player
             
             _lifePoint--;
             lifePresenter.OnChangeLife();
+            
+            _audioManager.PlaySE(SEType.PlayerDamage);
 
             if(_lifePoint > 0) return;
             

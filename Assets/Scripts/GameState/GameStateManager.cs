@@ -3,6 +3,7 @@ using GameEnd;
 using Player;
 using Player.GUI.Start;
 using SceneLoader;
+using Sound;
 using Timer;
 using Zenject;
 
@@ -22,9 +23,11 @@ namespace GameState
 
         private StartView _startView;
 
+        private AudioManager _audioManager;
+
         [Inject]
         private void Construct(PlayerController playerController, GameEndPresenter gameEndPresenter, TimePresenter timePresenter,
-            EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader, StartView startView)
+            EnemySpawner enemySpawner, FadeSceneLoader fadeSceneLoader, StartView startView, AudioManager audioManager)
         {
             _playerController = playerController;
 
@@ -37,6 +40,8 @@ namespace GameState
             _fadeSceneLoader = fadeSceneLoader;
 
             _startView = startView;
+
+            _audioManager = audioManager;
         }
         private void Awake()
         {
@@ -45,7 +50,7 @@ namespace GameState
 
         private void Start()
         {
-            GoToState(GameState.Setting);
+            GoToState(GameState.FadeOut);
         }
 
         private void InitializeStateMachine()
@@ -90,6 +95,7 @@ namespace GameState
         #region SettingMethod
         private void OnSetUpSetting()
         {
+            _audioManager.PlayBGM(BGMType.GameBGM);
             _startView.ViewStartSignal();
         }
 

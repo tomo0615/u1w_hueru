@@ -2,6 +2,7 @@
 using EffectManager;
 using Enemy.Spawner;
 using Interfaces;
+using Sound;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -14,12 +15,16 @@ namespace Player.Bullet
         [Inject] private EnemySpawner _enemySpawner;
 
         [Inject] private GameEffectManager _gameEffectManager;
+
+        [Inject] private AudioManager _audioManager;
         
         private bool _isHitEnemy = false;
         
         public void Explosion()
         {
             _gameEffectManager.OnGenelateEffect(transform.position, EffectType.Explosion);
+            
+            _audioManager.PlaySE(SEType.Explosion);
             
             transform.DOScale(Vector3.one*1.5f, 0.1f)
                 .OnComplete(() =>
