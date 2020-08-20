@@ -148,10 +148,10 @@ namespace Player
                     _audioManager.PlaySE(SEType.PlayerShot);
                 });
 
+            //VacuumEffect
             this.UpdateAsObservable()
                 .Where(_ => _isUpdatableObservable)
                 .Where(_ => _isDamageable == false)
-                .Skip(1)
                 .ThrottleFirst(TimeSpan.FromSeconds(0.5f))
                 .Subscribe(_ =>
                 {
