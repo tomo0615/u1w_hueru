@@ -121,29 +121,31 @@ namespace Enemy
 
         private void Dawn()
         {
+            if(_isDawn) return;
+            
             _audioManager.PlaySE(SEType.EnemyDawn);
             
             navMeshAgent.isStopped = true;
             _isDawn = true;
-            
-            navMeshAgent.speed = dawnedSpeed;
             
             DawnCoolTimeAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private async UniTaskVoid DawnCoolTimeAsync(CancellationToken token)
         {
+            navMeshAgent.speed = dawnedSpeed;
             _spriteRenderer.sprite = dawnSprite;
             
             await UniTask.Delay(TimeSpan.FromSeconds(dawnCoolTime), cancellationToken: token);
 
-            _spriteRenderer.sprite = defaultSprite;
-            
-            navMeshAgent.isStopped = false;
-            _isDawn = false;
             navMeshAgent.speed = defaultSpeed;
-            
+            _spriteRenderer.sprite = defaultSprite;
+
+            navMeshAgent.isStopped = false;
+
             hitPoint++;
+            
+            _isDawn = false;
         }
 
         protected bool IsVacuumable()
