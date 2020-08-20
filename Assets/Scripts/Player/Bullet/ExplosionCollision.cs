@@ -19,14 +19,16 @@ namespace Player.Bullet
         [Inject] private AudioManager _audioManager;
         
         private bool _isHitEnemy = false;
+
+        private const float MaxScale = 1.5f;
         
-        public void Explosion()
+        public void Explosion(float chargePower)
         {
             _gameEffectManager.OnGenelateEffect(transform.position, EffectType.Explosion);
             
             _audioManager.PlaySE(SEType.Explosion);
             
-            transform.DOScale(Vector3.one*1.5f, 0.1f)
+            transform.DOScale(Vector3.one * GetChargeRation(chargePower), 0.1f)
                 .OnComplete(() =>
                 {
                     if (_isHitEnemy == false)
@@ -45,6 +47,11 @@ namespace Player.Bullet
                     damageable.ApplyDamage();
                     _isHitEnemy = true;
                 });
+        }
+
+        private float GetChargeRation(float chargePower)
+        {
+            return MaxScale * chargePower;
         }
     }
 }

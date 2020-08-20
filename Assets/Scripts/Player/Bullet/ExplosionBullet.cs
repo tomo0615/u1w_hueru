@@ -10,12 +10,14 @@ namespace Player.Bullet
         private Rigidbody2D _rigidbody2D;
 
         [SerializeField] private ExplosionCollision explosionCollision = default;
-        
-        public void InitializeBullet(Vector2 shotDirection)
+
+        private float _currentChargePower = 0.0f;
+        public void InitializeBullet(Vector2 shotDirection, float chargePower)
         {
             this.OnCollisionEnter2DAsObservable()
                 .Subscribe(_ =>
                 {
+                    _currentChargePower = chargePower;
                     InstanceExplosion();
                 });
             
@@ -28,7 +30,7 @@ namespace Player.Bullet
             var explosion 
                 = Instantiate(explosionCollision, transform.position, Quaternion.identity);
             
-            explosion.Explosion();
+            explosion.Explosion(_currentChargePower);
             
             Destroy(gameObject);
         }

@@ -13,37 +13,26 @@ namespace Player
         [SerializeField] private Transform shotTransform = default;
 
         [SerializeField] private float chargeTime = 2.0f;
-         
+        
         private ReactiveProperty<float> _chargeTimeSave = new ReactiveProperty<float>(0.0f);
 
         public IReadOnlyReactiveProperty<float> ChargeTimeSave => _chargeTimeSave;
-
-        private bool _isShotable = false;
         
         public void Charge()
-        { 
-            _chargeTimeSave.Value += Time.deltaTime;
-            
-            if (_chargeTimeSave.Value < chargeTime) return;
-            
-            _isShotable = true;
+        {
+            if (_chargeTimeSave.Value < chargeTime)
+            { 
+                _chargeTimeSave.Value += Time.deltaTime;
+            }
         }
 
         public void ShotBullet()
         {
-            if (_isShotable == false)
-            {
-                _chargeTimeSave.Value = 0.0f;
-                _isShotable = false;
-                return;
-            }
-
             var bullet = Instantiate(explosionBullet, shotTransform.position, Quaternion.identity);
             
-            bullet.InitializeBullet(transform.up * shotSpeed);
-
+            bullet.InitializeBullet(transform.up * shotSpeed, _chargeTimeSave.Value);
+            
             _chargeTimeSave.Value = 0.0f;
-            _isShotable = false;
         }
     }
 }
