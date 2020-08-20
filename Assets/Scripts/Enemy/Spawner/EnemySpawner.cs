@@ -1,6 +1,5 @@
 ﻿using GameEnd;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -12,8 +11,8 @@ namespace Enemy.Spawner
 
         [SerializeField] private int maxRandomCount = 3;
 
-        private int _currentEnemyCount = 0;
-
+        private ReactiveProperty<int> _currentEnemyCount = new ReactiveProperty<int>();
+        
         [Inject] private GameEndPresenter _gameEndPresenter;
 
         [SerializeField] private Transform firstChaseTransform;
@@ -26,8 +25,8 @@ namespace Enemy.Spawner
 
             InstanceEnemy(0,firstChaseTransform.position);
             
-            this.UpdateAsObservable()
-                .Where(_ => _currentEnemyCount <= 0)
+            _currentEnemyCount
+                .Where(value => value <= 0)
                 .Subscribe(_ =>
                 {
                     _gameEndPresenter.OnGameEnd(true);
@@ -38,7 +37,7 @@ namespace Enemy.Spawner
         private void InstanceEnemy(int index, Vector3 spawnPosition)
         { 
             Instantiate(enemySpawnTable.EnemyList[index], spawnPosition, Quaternion.identity);
-            _currentEnemyCount++;
+            _currentEnemyCount.Value++;
         }
 
         //攻撃を外したら呼び出す
@@ -67,7 +66,7 @@ namespace Enemy.Spawner
 
         public void DecreaseEnemy()
         {
-            _currentEnemyCount--;
+            _currentEnemyCount.Value--;
         }
     }
 }
