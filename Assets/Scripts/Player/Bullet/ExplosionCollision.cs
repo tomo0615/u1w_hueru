@@ -23,7 +23,7 @@ namespace Player.Bullet
         public void Explosion(float chargePower)
         {
             _audioManager.PlaySE(SEType.Explosion);
-            
+
             transform.DOScale(Vector3.one * GetChargeRation(chargePower), 0.1f)
                 .OnComplete(() =>
                 {
@@ -31,7 +31,7 @@ namespace Player.Bullet
                     {
                         _enemySpawner.InstanceRandomEnemy(transform.position);
                     }
-                    
+
                     Destroy(gameObject);
                 });
             

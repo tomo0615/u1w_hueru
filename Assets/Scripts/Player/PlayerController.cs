@@ -166,6 +166,8 @@ namespace Player
 
         public void AttackedEnemy()
         {
+            if(_isUpdatableObservable == false) return;
+            
             if (_isDamageable == false) return;
             //無敵時間を可視化する
             _isDamageable = false;
