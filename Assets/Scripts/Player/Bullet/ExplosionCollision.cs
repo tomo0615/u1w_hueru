@@ -13,9 +13,7 @@ namespace Player.Bullet
     public class ExplosionCollision : MonoBehaviour
     {
         [Inject] private EnemySpawner _enemySpawner;
-
-        [Inject] private GameEffectManager _gameEffectManager;
-
+        
         [Inject] private AudioManager _audioManager;
         
         private bool _isHitEnemy = false;
@@ -24,8 +22,6 @@ namespace Player.Bullet
         
         public void Explosion(float chargePower)
         {
-            _gameEffectManager.OnGenelateEffect(transform.position, EffectType.Explosion);
-            
             _audioManager.PlaySE(SEType.Explosion);
             
             transform.DOScale(Vector3.one * GetChargeRation(chargePower), 0.1f)
