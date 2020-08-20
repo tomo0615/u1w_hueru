@@ -19,3 +19,5 @@ MonoBehaviour:
   enemyDawn: {fileID: 8300000, guid: f9517356afb533a41b9e7cb6f155031e, type: 3}
   scoreGet: {fileID: 8300000, guid: 34c638d8d99ccfd44a261f13505ab317, type: 3}
   explosion: {fileID: 8300000, guid: 08c98e789286e9e40b9684b1d03958e7, type: 3}
+  charge: {fileID: 8300000, guid: 3085ddbf5f1784006a566bb38c04cec3, type: 3}
+  chargeEnd: {fileID: 8300000, guid: bdaad1ef0ecb6453f90a6ff154da6fb0, type: 3}

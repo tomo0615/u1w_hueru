@@ -24,6 +24,10 @@ namespace Sound
         public AudioClip scoreGet;
 
         public AudioClip explosion;
+
+        public AudioClip charge;
+
+        public AudioClip chargeEnd;
         #endregion
     }
 }

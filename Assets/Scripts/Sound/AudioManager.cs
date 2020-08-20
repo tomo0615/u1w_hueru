@@ -35,6 +35,8 @@ namespace Sound
                 {SEType.ScoreGet, audioTable.scoreGet},
                 
                 {SEType.Explosion, audioTable.explosion},
+                {SEType.Charge,audioTable.charge},
+                {SEType.ChargeEnd,audioTable.chargeEnd}
             };
         }
 
@@ -47,6 +49,11 @@ namespace Sound
         public void PlaySE(SEType type)
         {
             seAudioSource.PlayOneShot(_seList[type]);
+        }
+
+        public void StopSE()
+        {
+            seAudioSource.Stop();
         }
     }
 }

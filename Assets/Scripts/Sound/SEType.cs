@@ -9,6 +9,8 @@
         EnemyDawn,
         
         ScoreGet,
-        Explosion
+        Explosion,
+        Charge,
+        ChargeEnd,
     }
 }
