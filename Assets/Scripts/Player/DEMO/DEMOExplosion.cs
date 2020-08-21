@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using Enemy.Spawner;
 using Interfaces;
 using Sound;
 using UniRx;
@@ -7,16 +6,12 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-namespace Player.Bullet
+namespace Player.DEMO
 {
-    public class ExplosionCollision : MonoBehaviour
+    public class DEMOExplosion : MonoBehaviour
     {
-        [Inject] private EnemySpawner _enemySpawner;
-        
         [Inject] private AudioManager _audioManager;
         
-        private bool _isHitEnemy = false;
-
         private const float MaxScale = 1.5f;
         
         public void Explosion(float chargePower)
@@ -26,11 +21,6 @@ namespace Player.Bullet
             transform.DOScale(Vector3.one * GetChargeRation(chargePower), 0.1f)
                 .OnComplete(() =>
                 {
-                    if (_isHitEnemy == false)
-                    {
-                        _enemySpawner.InstanceRandomEnemy(transform.position);
-                    }
-
                     Destroy(gameObject);
                 });
             
@@ -40,7 +30,6 @@ namespace Player.Bullet
                 .Subscribe(damageable =>
                 {
                     damageable.ApplyDamage();
-                    _isHitEnemy = true;
                 });
         }
 

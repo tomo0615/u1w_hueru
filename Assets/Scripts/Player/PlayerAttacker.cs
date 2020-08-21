@@ -9,7 +9,7 @@ namespace Player
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        [SerializeField] private ExplosionBullet explosionBullet = default;
+        [SerializeField] private BaseBullet explosionBullet = default;
 
         [SerializeField] private float shotSpeed = 10f;
 

@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+﻿using Player.Bullet;
+using UnityEngine;
 
-namespace Player.Bullet
+namespace Player.DEMO
 {
-    public class ExplosionBullet : BaseBullet
+    public class DEMOBullet : BaseBullet
     {
-        [SerializeField] private ExplosionCollision explosionCollision = default;
+        [SerializeField] private DEMOExplosion explosionCollision = default;
         
         protected override void InstanceExplosion()
         {
-            var explosion 
+            var explosion
                 = Instantiate(explosionCollision, transform.position, Quaternion.identity);
-            
+
             explosion.Explosion(CurrentChargePower);
-            
+
             Destroy(gameObject);
         }
     }
