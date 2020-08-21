@@ -41,8 +41,8 @@ namespace Player.DEMO
                 .Subscribe(_ =>
                 {
                     _audioManager.PlaySE(SEType.ScoreGet);
-                    
-                    Destroy(transform.root.gameObject);//子にクラスを持たせてるため
+
+                    Destroy(transform.root.gameObject);
                 });
              
             this.UpdateAsObservable()
