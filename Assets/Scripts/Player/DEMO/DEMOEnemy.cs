@@ -44,6 +44,8 @@ namespace Player.DEMO
                 {
                     _audioManager.PlaySE(SEType.ScoreGet);
                     
+                    _rigidbody2D.velocity = Vector2.zero;
+                    
                     transform.position = originTransform.position;
                     _isDawn = false;
                     _spriteRenderer.sprite = defaultSprite;
