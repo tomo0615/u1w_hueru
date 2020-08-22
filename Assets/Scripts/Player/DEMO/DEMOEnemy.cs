@@ -30,6 +30,8 @@ namespace Player.DEMO
         private bool _isDawn = false;
 
         private Rigidbody2D _rigidbody2D;
+
+        [SerializeField] private Transform originTransform;
         
         protected void Start()
         {
@@ -41,8 +43,11 @@ namespace Player.DEMO
                 .Subscribe(_ =>
                 {
                     _audioManager.PlaySE(SEType.ScoreGet);
-
-                    Destroy(transform.root.gameObject);
+                    
+                    transform.position = originTransform.position;
+                    _isDawn = false;
+                    _spriteRenderer.sprite = defaultSprite;
+                    hitPoint++;
                 });
              
             this.UpdateAsObservable()
@@ -56,7 +61,7 @@ namespace Player.DEMO
         private void VaccuumedPlayer()
         {
             var direction = (demoPlayer.transform.position - transform.position).normalized;
-            _rigidbody2D.AddForce(direction * 100f);
+            _rigidbody2D.AddForce(direction * 1000f);
         }
         
         //Playerのたまに当たったら
@@ -65,7 +70,7 @@ namespace Player.DEMO
             hitPoint--;
 
             if (hitPoint > 0) return;
-            
+
             Dawn();
         }
 

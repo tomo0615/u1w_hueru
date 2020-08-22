@@ -17,7 +17,7 @@ namespace Player
 
         public void LookMousePosition(Vector3 mouseDirection)
         {
-            var position = _camera.WorldToScreenPoint(_transform.localPosition);
+            var position = _camera.WorldToScreenPoint(_transform.position);
             var rotation = Quaternion.LookRotation(Vector3.forward, mouseDirection - position);
             _transform.localRotation = rotation;
         }

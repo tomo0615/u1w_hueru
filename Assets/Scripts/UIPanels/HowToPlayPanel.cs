@@ -8,6 +8,9 @@ namespace UIPanels
         [SerializeField] private Transform cameraTransform;
 
         [SerializeField] private float cameraMoveTime = 0.5f;
+
+        [SerializeField] private GameObject demoObject;
+        
         public void ViewPanel()
         {
             if (Camera.main != null)
@@ -16,6 +19,7 @@ namespace UIPanels
                     .OnComplete(() => 
                     { 
                         gameObject.SetActive(true); 
+                        demoObject.SetActive(true);
                     });
             }
         }
