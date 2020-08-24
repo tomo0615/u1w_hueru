@@ -11,7 +11,7 @@ namespace Enemy.Spawner
 
         [SerializeField] private int maxRandomCount = 3;
 
-        private ReactiveProperty<int> _currentEnemyCount = new ReactiveProperty<int>();
+        private ReactiveProperty<int> _currentEnemyCount = new ReactiveProperty<int>(0);
         
         [Inject] private GameEndPresenter _gameEndPresenter;
 
@@ -36,8 +36,8 @@ namespace Enemy.Spawner
 
         private void InstanceEnemy(int index, Vector3 spawnPosition)
         { 
-            Instantiate(enemySpawnTable.EnemyList[index], spawnPosition, Quaternion.identity);
             _currentEnemyCount.Value++;
+            Instantiate(enemySpawnTable.EnemyList[index], spawnPosition, Quaternion.identity);
         }
 
         //攻撃を外したら呼び出す

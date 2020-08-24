@@ -74,13 +74,15 @@ namespace Enemy
              
              this.OnCollisionEnter2DAsObservable()
                  .Where(_ => IsVacuumable() && PlayerController.IsVacuumEnemy)
+                 .Take(1)
                  .Subscribe(_ =>
                  {
+                     _enemySpawner.DecreaseEnemy();
+                     
                      _scorePresenter.OnChangeScore(scoreValue);
                      
                      _audioManager.PlaySE(SEType.ScoreGet);
                      
-                     _enemySpawner.DecreaseEnemy();
                      Destroy(transform.root.gameObject);//子にクラスを持たせてるため
                  });
              
